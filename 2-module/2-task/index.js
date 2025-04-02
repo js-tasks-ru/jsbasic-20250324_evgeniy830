@@ -1,3 +1,4 @@
 function isEmpty(obj) {
-  // ваш код...
+  // TODO: Подумать как написать лучше
+  return !Boolean(Object.keys(obj).length)
 }
