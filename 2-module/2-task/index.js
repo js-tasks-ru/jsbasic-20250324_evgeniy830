@@ -1,4 +1,11 @@
 function isEmpty(obj) {
-  // TODO: Подумать как написать лучше
-  return !Boolean(Object.keys(obj).length)
+  return Object.keys(obj).length === 0;
 }
+
+// Альтернативная реализация
+// function isEmpty(obj) {
+//   for (let key in obj) {
+//     return false;
+//   }
+//   return true;
+// }
