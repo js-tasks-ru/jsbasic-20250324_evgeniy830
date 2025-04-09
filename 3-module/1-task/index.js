@@ -1,7 +1,7 @@
 function namify(users) {
-  const resultArray = [];
+  const namesArray = [];
   for (let user of users) {
-    resultArray.push(user.name);
+    namesArray.push(user.name);
   }
-  return resultArray;
+  return namesArray;
 }

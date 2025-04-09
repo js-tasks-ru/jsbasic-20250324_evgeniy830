@@ -1,4 +1,3 @@
-// your code goes here
 function camelize(str) {
   const separatedArray = str.split('-');
   const camelCaseArray = separatedArray.map((word, index) =>
@@ -6,9 +5,3 @@ function camelize(str) {
   );
   return camelCaseArray.join('');
 }
-
-
-
-camelize('background-color')
-camelize('list-style-image')
-camelize('-webkit-transition')

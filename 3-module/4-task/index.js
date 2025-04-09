@@ -1,8 +1,8 @@
 function showSalary(users, age) {
   const filteredByAgeUsers = users.filter((user) => user.age <= age);
-  let resultStr = '';
+  let salariesStr = '';
   for (let user of filteredByAgeUsers) {
-    resultStr += `${user.name}, ${user.balance}\n`;
+    salariesStr += `${user.name}, ${user.balance}\n`;
   }
-  return resultStr.slice(0, -1);
+  return salariesStr.slice(0, -1);
 }
