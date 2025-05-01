@@ -1,8 +1,5 @@
 import createElement from '../../assets/lib/create-element.js';
 
-// TODO: скрывать кнопки на краях ленты
-// TODO: поправить вёрстку
-
 export default class RibbonMenu {
   elem = null;
   #categories = [];
