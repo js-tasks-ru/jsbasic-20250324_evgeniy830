@@ -1,63 +1,55 @@
-/**
- * Компонент, который реализует таблицу
- * с возможностью удаления строк
- *
- * Пример одного элемента, описывающего строку таблицы
- *
- *      {
-     *          name: 'Ilia',
-     *          age: 25,
-     *          salary: '1000',
-     *          city: 'Petrozavodsk'
-     *      },
- *
- */
+import createElement from '../../assets/lib/create-element.js';
+
 export default class UserTable {
+  #rows = [];
+  elem = null;
+
   constructor(rows) {
-    this.elem = document.createElement('table');
-
-    this.elem.innerHTML = `
-      <thead>
-          <tr>
-            <td>Имя</td>
-            <td>Возраст</td>
-            <td>Зарплата</td>
-            <td>Город</td>
-            <td></td>
-          </tr>
-      </thead>
-    `;
-
-    let tableInner = rows.map(row => {
-      let cellsWithData = Object.values(row) // для каждого значения из объекта row
-        .map(value => `<td>${value}</td>`) // обернуть его в <td>
-        .join(''); // полученный массив <td>...</td> объединить в одну строку
-
-      return `
-          <tr>
-            ${cellsWithData}
-            <td><button>X</button></td>
-          </tr>
-        `; // возвращаем верстку одной строки
-    }).join('');
-
-    this.elem.innerHTML += `
-      <tbody>
-        ${tableInner}
-      <tbody>
-    `; // оборачиваем полученные строчки в tbody
-
-    this.elem.addEventListener('click', (event) => this.onClick(event));
+    this.#rows = rows || this.#rows;
+    this.#render();
   }
 
-  onClick(event) {
-    if (event.target.tagName != 'BUTTON') {
-      return;
-    }
+  #render() {
+    this.elem = createElement(this.#tableTemplate());
+    this.#addEventListeners();
+  }
 
-    let tr = event.target.closest('tr');
+  #tableTemplate() {
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Зарплата</th>
+            <th>Город</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${this.#rows.map(row => this.#rowTemplate(row)).join('')}
+        </tbody>
+      </table>
+    `;
+  }
 
-    tr.remove();
+  #rowTemplate(row) {
+    return `
+        <tr>
+          <td>${row.name}</td>
+          <td>${row.age}</td>
+          <td>${row.salary}</td>
+          <td>${row.city}</td>
+          <td><button class="remove-button-js">X</button></td>
+        </tr>
+    `;
+  }
+
+  #addEventListeners() {
+    const buttons = this.elem.querySelectorAll('.remove-button-js');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => button.closest('tr').remove());
+    });
   }
 
 }
